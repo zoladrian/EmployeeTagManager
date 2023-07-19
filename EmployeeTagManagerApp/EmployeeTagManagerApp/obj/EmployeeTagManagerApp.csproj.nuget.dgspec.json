@@ -1,0 +1,359 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\Adrian\\source\\repos\\EmployeeTagManager\\EmployeeTagManagerApp\\EmployeeTagManagerApp\\EmployeeTagManagerApp.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\Adrian\\source\\repos\\EmployeeTagManager\\EmployeeTagManagerApp\\EmployeeTagManagerApp.Core\\EmployeeTagManagerApp.Core.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Adrian\\source\\repos\\EmployeeTagManager\\EmployeeTagManagerApp\\EmployeeTagManagerApp.Core\\EmployeeTagManagerApp.Core.csproj",
+        "projectName": "EmployeeTagManagerApp.Core",
+        "projectPath": "C:\\Users\\Adrian\\source\\repos\\EmployeeTagManager\\EmployeeTagManagerApp\\EmployeeTagManagerApp.Core\\EmployeeTagManagerApp.Core.csproj",
+        "packagesPath": "C:\\Users\\Adrian\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Adrian\\source\\repos\\EmployeeTagManager\\EmployeeTagManagerApp\\EmployeeTagManagerApp.Core\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Adrian\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0-windows"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0-windows7.0": {
+            "targetAlias": "net6.0-windows",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0-windows7.0": {
+          "targetAlias": "net6.0-windows",
+          "dependencies": {
+            "Prism.Wpf": {
+              "target": "Package",
+              "version": "[8.1.97, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            },
+            "Microsoft.WindowsDesktop.App.WPF": {
+              "privateAssets": "none"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.101\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\Adrian\\source\\repos\\EmployeeTagManager\\EmployeeTagManagerApp\\EmployeeTagManagerApp\\EmployeeTagManagerApp.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Adrian\\source\\repos\\EmployeeTagManager\\EmployeeTagManagerApp\\EmployeeTagManagerApp\\EmployeeTagManagerApp.csproj",
+        "projectName": "EmployeeTagManagerApp",
+        "projectPath": "C:\\Users\\Adrian\\source\\repos\\EmployeeTagManager\\EmployeeTagManagerApp\\EmployeeTagManagerApp\\EmployeeTagManagerApp.csproj",
+        "packagesPath": "C:\\Users\\Adrian\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Adrian\\source\\repos\\EmployeeTagManager\\EmployeeTagManagerApp\\EmployeeTagManagerApp\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Adrian\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0-windows"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0-windows7.0": {
+            "targetAlias": "net6.0-windows",
+            "projectReferences": {
+              "C:\\Users\\Adrian\\source\\repos\\EmployeeTagManager\\EmployeeTagManagerApp\\EmployeeTagManagerApp.Core\\EmployeeTagManagerApp.Core.csproj": {
+                "projectPath": "C:\\Users\\Adrian\\source\\repos\\EmployeeTagManager\\EmployeeTagManagerApp\\EmployeeTagManagerApp.Core\\EmployeeTagManagerApp.Core.csproj"
+              },
+              "C:\\Users\\Adrian\\source\\repos\\EmployeeTagManager\\EmployeeTagManagerApp\\Modules\\EmployeeTagManagerApp.Modules.ModuleName\\EmployeeTagManagerApp.Modules.ModuleName.csproj": {
+                "projectPath": "C:\\Users\\Adrian\\source\\repos\\EmployeeTagManager\\EmployeeTagManagerApp\\Modules\\EmployeeTagManagerApp.Modules.ModuleName\\EmployeeTagManagerApp.Modules.ModuleName.csproj"
+              },
+              "C:\\Users\\Adrian\\source\\repos\\EmployeeTagManager\\EmployeeTagManagerApp\\Services\\EmployeeTagManagerApp.Services.Interfaces\\EmployeeTagManagerApp.Services.Interfaces.csproj": {
+                "projectPath": "C:\\Users\\Adrian\\source\\repos\\EmployeeTagManager\\EmployeeTagManagerApp\\Services\\EmployeeTagManagerApp.Services.Interfaces\\EmployeeTagManagerApp.Services.Interfaces.csproj"
+              },
+              "C:\\Users\\Adrian\\source\\repos\\EmployeeTagManager\\EmployeeTagManagerApp\\Services\\EmployeeTagManagerApp.Services\\EmployeeTagManagerApp.Services.csproj": {
+                "projectPath": "C:\\Users\\Adrian\\source\\repos\\EmployeeTagManager\\EmployeeTagManagerApp\\Services\\EmployeeTagManagerApp.Services\\EmployeeTagManagerApp.Services.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0-windows7.0": {
+          "targetAlias": "net6.0-windows",
+          "dependencies": {
+            "Prism.Unity": {
+              "target": "Package",
+              "version": "[8.1.97, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            },
+            "Microsoft.WindowsDesktop.App.WPF": {
+              "privateAssets": "none"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.101\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\Adrian\\source\\repos\\EmployeeTagManager\\EmployeeTagManagerApp\\Modules\\EmployeeTagManagerApp.Modules.ModuleName\\EmployeeTagManagerApp.Modules.ModuleName.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Adrian\\source\\repos\\EmployeeTagManager\\EmployeeTagManagerApp\\Modules\\EmployeeTagManagerApp.Modules.ModuleName\\EmployeeTagManagerApp.Modules.ModuleName.csproj",
+        "projectName": "EmployeeTagManagerApp.Modules.ModuleName",
+        "projectPath": "C:\\Users\\Adrian\\source\\repos\\EmployeeTagManager\\EmployeeTagManagerApp\\Modules\\EmployeeTagManagerApp.Modules.ModuleName\\EmployeeTagManagerApp.Modules.ModuleName.csproj",
+        "packagesPath": "C:\\Users\\Adrian\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Adrian\\source\\repos\\EmployeeTagManager\\EmployeeTagManagerApp\\Modules\\EmployeeTagManagerApp.Modules.ModuleName\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Adrian\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0-windows"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0-windows7.0": {
+            "targetAlias": "net6.0-windows",
+            "projectReferences": {
+              "C:\\Users\\Adrian\\source\\repos\\EmployeeTagManager\\EmployeeTagManagerApp\\EmployeeTagManagerApp.Core\\EmployeeTagManagerApp.Core.csproj": {
+                "projectPath": "C:\\Users\\Adrian\\source\\repos\\EmployeeTagManager\\EmployeeTagManagerApp\\EmployeeTagManagerApp.Core\\EmployeeTagManagerApp.Core.csproj"
+              },
+              "C:\\Users\\Adrian\\source\\repos\\EmployeeTagManager\\EmployeeTagManagerApp\\Services\\EmployeeTagManagerApp.Services.Interfaces\\EmployeeTagManagerApp.Services.Interfaces.csproj": {
+                "projectPath": "C:\\Users\\Adrian\\source\\repos\\EmployeeTagManager\\EmployeeTagManagerApp\\Services\\EmployeeTagManagerApp.Services.Interfaces\\EmployeeTagManagerApp.Services.Interfaces.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0-windows7.0": {
+          "targetAlias": "net6.0-windows",
+          "dependencies": {
+            "Prism.Wpf": {
+              "target": "Package",
+              "version": "[8.1.97, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            },
+            "Microsoft.WindowsDesktop.App.WPF": {
+              "privateAssets": "none"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.101\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\Adrian\\source\\repos\\EmployeeTagManager\\EmployeeTagManagerApp\\Services\\EmployeeTagManagerApp.Services.Interfaces\\EmployeeTagManagerApp.Services.Interfaces.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Adrian\\source\\repos\\EmployeeTagManager\\EmployeeTagManagerApp\\Services\\EmployeeTagManagerApp.Services.Interfaces\\EmployeeTagManagerApp.Services.Interfaces.csproj",
+        "projectName": "EmployeeTagManagerApp.Services.Interfaces",
+        "projectPath": "C:\\Users\\Adrian\\source\\repos\\EmployeeTagManager\\EmployeeTagManagerApp\\Services\\EmployeeTagManagerApp.Services.Interfaces\\EmployeeTagManagerApp.Services.Interfaces.csproj",
+        "packagesPath": "C:\\Users\\Adrian\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Adrian\\source\\repos\\EmployeeTagManager\\EmployeeTagManagerApp\\Services\\EmployeeTagManagerApp.Services.Interfaces\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Adrian\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.1": {
+            "targetAlias": "netstandard2.1",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.1": {
+          "targetAlias": "netstandard2.1",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "NETStandard.Library": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.101\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\Adrian\\source\\repos\\EmployeeTagManager\\EmployeeTagManagerApp\\Services\\EmployeeTagManagerApp.Services\\EmployeeTagManagerApp.Services.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Adrian\\source\\repos\\EmployeeTagManager\\EmployeeTagManagerApp\\Services\\EmployeeTagManagerApp.Services\\EmployeeTagManagerApp.Services.csproj",
+        "projectName": "EmployeeTagManagerApp.Services",
+        "projectPath": "C:\\Users\\Adrian\\source\\repos\\EmployeeTagManager\\EmployeeTagManagerApp\\Services\\EmployeeTagManagerApp.Services\\EmployeeTagManagerApp.Services.csproj",
+        "packagesPath": "C:\\Users\\Adrian\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Adrian\\source\\repos\\EmployeeTagManager\\EmployeeTagManagerApp\\Services\\EmployeeTagManagerApp.Services\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Adrian\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.1": {
+            "targetAlias": "netstandard2.1",
+            "projectReferences": {
+              "C:\\Users\\Adrian\\source\\repos\\EmployeeTagManager\\EmployeeTagManagerApp\\Services\\EmployeeTagManagerApp.Services.Interfaces\\EmployeeTagManagerApp.Services.Interfaces.csproj": {
+                "projectPath": "C:\\Users\\Adrian\\source\\repos\\EmployeeTagManager\\EmployeeTagManagerApp\\Services\\EmployeeTagManagerApp.Services.Interfaces\\EmployeeTagManagerApp.Services.Interfaces.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.1": {
+          "targetAlias": "netstandard2.1",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "NETStandard.Library": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.101\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

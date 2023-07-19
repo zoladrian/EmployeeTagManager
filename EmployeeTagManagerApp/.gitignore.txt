@@ -1,0 +1,73 @@
+# This .gitignore file should be placed at the root of your repository
+
+# Ignore all files that are generated during a build or are for Visual Studio user-specific settings
+**/bin
+**/obj
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Ignore .NET Core build results
+**/Properties/launchSettings.json
+*.dll
+*.exe
+*.pdb
+*.deps.json
+*.runtimeconfig.json
+
+# Ignore all nuget packages and libraries
+**/packages
+*.dll
+*.exe
+*.pdb
+*.cer
+*.snk
+
+# Ignore all Resharper and TFS files
+**/_ReSharper*
+**/TFS
+*.DotSettings.user
+*.DotSettings
+
+# Ignore all files that are specific to VS Code
+.vscode
+*.code-workspace
+
+# Ignore other misc files like log, cache, etc
+*.log
+*.cache
+*.swp
+*.bak
+*.tmp
+*.swp
+*~
+*.dbmdl
+*.dbproj.schemaview
+*.jfm
+*.pfx
+*.publishsettings
+
+# Ignore commonly unwanted files
+thumbs.db
+Desktop.ini
+
+# Ignore Visual Studio 2015 / Xamarin cache/options directory
+.vs/
+
+# Ignore project settings
+*.DotSettings.user
+*.resharper
+
+# Ignore database files
+*.db
+*.sqlite
+
+# Ignore Node modules
+node_modules/
+
+# Ignore Python compiled files
+*.pyc
+
+# Ignore secrets
+*.secrets.json
