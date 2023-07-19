@@ -2,7 +2,7 @@
 
 namespace EmployeeTagManagerApp.Services
 {
-    public class MessageService : IMessageService
+    public class EmployeeService : IEmployeeService
     {
         public string GetMessage()
         {
