@@ -1,6 +1,6 @@
 ﻿namespace EmployeeTagManagerApp.Services.Interfaces
 {
-    public interface IMessageService
+    public interface IEmployeeService
     {
         string GetMessage();
     }
