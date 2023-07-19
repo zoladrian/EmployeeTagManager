@@ -20,7 +20,7 @@ namespace EmployeeTagManagerApp
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            containerRegistry.RegisterSingleton<IMessageService, EmployeeService>();
+            containerRegistry.RegisterSingleton<IEmployeeService, EmployeeService>();
         }
 
         protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)
