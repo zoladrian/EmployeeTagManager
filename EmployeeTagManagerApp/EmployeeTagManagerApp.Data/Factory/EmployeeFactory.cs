@@ -23,13 +23,14 @@ namespace EmployeeTagManagerApp.Data.Factory
                 Name = CleanInput(values[1]),
                 Surname = CleanInput(values[2]),
                 Email = CleanInput(values[3]),
-                Phone = values[4] 
+                Phone = CleanInput(values[4])
             };
 
             ValidationResult results = _validator.Validate(employee);
 
             if (!results.IsValid)
             {
+                var the = employee;
                 throw new ValidationException(results.Errors);
             }
 
@@ -38,7 +39,7 @@ namespace EmployeeTagManagerApp.Data.Factory
 
         private string CleanInput(string input)
         {
-            return input.Replace("'", "''");
+            return input.Replace("'", "''").Trim('\r').Trim();
         }
     }
 }
