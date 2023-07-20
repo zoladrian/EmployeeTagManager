@@ -23,8 +23,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmployeeTagManagerApp.Core"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmployeeTagManagerApp.Data", "EmployeeTagManagerApp.Data\EmployeeTagManagerApp.Data.csproj", "{D838AAFB-DE54-4B65-93D8-A52D73B675F5}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmployeeTagManagerApp.Abstraction", "EmployeeTagManagerApp.Abstraction\EmployeeTagManagerApp.Abstraction.csproj", "{C75FFB9E-73C6-4133-ACEB-D0B411B392AA}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -59,10 +57,6 @@ Global
 		{D838AAFB-DE54-4B65-93D8-A52D73B675F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D838AAFB-DE54-4B65-93D8-A52D73B675F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D838AAFB-DE54-4B65-93D8-A52D73B675F5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C75FFB9E-73C6-4133-ACEB-D0B411B392AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C75FFB9E-73C6-4133-ACEB-D0B411B392AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C75FFB9E-73C6-4133-ACEB-D0B411B392AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C75FFB9E-73C6-4133-ACEB-D0B411B392AA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

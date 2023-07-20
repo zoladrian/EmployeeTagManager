@@ -4,19 +4,21 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using EmployeeTagManagerApp.Data.Models;
-using EmployeeTagManagerApp.Abstraction;
 using System.Reflection;
 using System.Text;
+using EmployeeTagManagerApp.Data.Factory;
+using EmployeeTagManagerApp.Data.Interfaces;
 
 namespace EmployeeTagManagerApp.Data
 {
     public class DatabaseInitializer : IDatabaseInitializer
     {
         private readonly ManagerDbContext _dbContext;
-
-        public DatabaseInitializer(ManagerDbContext dbContext)
+        private readonly IEmployeeFactory _employeeFactory;
+        public DatabaseInitializer(ManagerDbContext dbContext, IEmployeeFactory employeeFactory)
         {
             _dbContext = dbContext;
+            _employeeFactory = employeeFactory;
         }
 
         public async Task InitializeAsync()
@@ -40,15 +42,7 @@ namespace EmployeeTagManagerApp.Data
                 foreach (var line in csvLines)
                 {
                     var values = line.Split(',');
-
-                    var employee = new Employee
-                    {
-                        Id = int.Parse(values[0]),
-                        Name = values[1].Replace("'", "''"),
-                        Surname = values[2].Replace("'", "''"),
-                        Email = values[3],
-                        Phone = values[4]
-                    };
+                    var employee = _employeeFactory.Create(values);
 
                     sb.Append($"INSERT INTO [dbo].[Employees] (Id, Name, Surname, Email, Phone) VALUES ({employee.Id}, '{employee.Name}', '{employee.Surname}', '{employee.Email}', '{employee.Phone}');");
                 }

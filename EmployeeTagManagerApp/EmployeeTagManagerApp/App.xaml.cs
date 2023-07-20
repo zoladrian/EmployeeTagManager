@@ -1,9 +1,13 @@
-﻿using EmployeeTagManagerApp.Abstraction;
-using EmployeeTagManagerApp.Data;
+﻿using EmployeeTagManagerApp.Data;
+using EmployeeTagManagerApp.Data.Factory;
+using EmployeeTagManagerApp.Data.Factory.Validators;
+using EmployeeTagManagerApp.Data.Interfaces;
+using EmployeeTagManagerApp.Data.Models;
 using EmployeeTagManagerApp.Modules.ModuleName;
 using EmployeeTagManagerApp.Services;
 using EmployeeTagManagerApp.Services.Interfaces;
 using EmployeeTagManagerApp.Views;
+using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using Prism.Ioc;
 using Prism.Modularity;
@@ -22,6 +26,10 @@ namespace EmployeeTagManagerApp
         }
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
+            containerRegistry.Register<IValidator<Employee>, EmployeeValidator>();
+
+            containerRegistry.RegisterScoped<IEmployeeFactory, EmployeeFactory>();
+
             containerRegistry.RegisterSingleton<IEmployeeService, EmployeeService>();
             containerRegistry.RegisterSingleton<IDatabaseInitializer, DatabaseInitializer>();
             containerRegistry.RegisterSingleton<ManagerDbContext>(sp =>
