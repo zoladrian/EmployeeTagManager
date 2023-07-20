@@ -27,6 +27,4 @@ namespace EmployeeTagManagerApp.Data.Factory.Validators
                 .Matches(@"^\d*$");
         }
     }
-
-
 }
