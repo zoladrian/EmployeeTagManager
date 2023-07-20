@@ -12,23 +12,23 @@ namespace EmployeeTagManagerApp.Data
 
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Tag> Tags { get; set; }
-        public DbSet<EmployeeTag> EmployeeTags { get; set; }  // Dodaj to
+        public DbSet<EmployeeTag> EmployeeTags { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // Zdefiniuj relacje wiele-do-wielu
+            // define relaction many-to-many
             modelBuilder.Entity<EmployeeTag>()
-                .HasKey(et => new { et.EmployeeId, et.TagId });  // Klucz złożony
+                .HasKey(et => new { et.EmployeeId, et.TagId });
 
             modelBuilder.Entity<EmployeeTag>()
                 .HasOne(et => et.Employee)
                 .WithMany(e => e.EmployeeTags)
-                .HasForeignKey(et => et.EmployeeId);  // Zdefiniowanie klucza obcego
+                .HasForeignKey(et => et.EmployeeId);
 
             modelBuilder.Entity<EmployeeTag>()
                 .HasOne(et => et.Tag)
                 .WithMany(t => t.EmployeeTags)
-                .HasForeignKey(et => et.TagId);  // Zdefiniowanie klucza obcego
+                .HasForeignKey(et => et.TagId);
         }
     }
 }
