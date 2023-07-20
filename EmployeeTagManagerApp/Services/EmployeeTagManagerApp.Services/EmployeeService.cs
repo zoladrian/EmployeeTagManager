@@ -5,6 +5,7 @@ using EmployeeTagManagerApp.Data;
 using System;
 using Microsoft.EntityFrameworkCore;
 using EmployeeTagManagerApp.Data.Models;
+using System.Linq;
 
 namespace EmployeeTagManagerApp.Services
 {
@@ -19,12 +20,18 @@ namespace EmployeeTagManagerApp.Services
 
         public async Task<IEnumerable<Employee>> GetEmployeesAsync()
         {
-            return await _dbContext.Employees.Include(e => e.Tags).ToListAsync();
+            return await _dbContext.Employees
+                .Include(e => e.EmployeeTags)
+                .ThenInclude(et => et.Tag)
+                .ToListAsync();
         }
 
         public async Task<Employee> GetEmployeeByIdAsync(int id)
         {
-            return await _dbContext.Employees.Include(e => e.Tags).FirstOrDefaultAsync(e => e.Id == id);
+            return await _dbContext.Employees
+                .Include(e => e.EmployeeTags)
+                .ThenInclude(et => et.Tag)
+                .FirstOrDefaultAsync(e => e.Id == id);
         }
 
         public async Task CreateEmployeeAsync(Employee employee)
@@ -47,6 +54,38 @@ namespace EmployeeTagManagerApp.Services
                 _dbContext.Employees.Remove(employee);
                 await _dbContext.SaveChangesAsync();
             }
+        }
+
+        public async Task AddTagToEmployeeAsync(int employeeId, int tagId)
+        {
+            var employeeTag = new EmployeeTag
+            {
+                EmployeeId = employeeId,
+                TagId = tagId
+            };
+
+            _dbContext.EmployeeTags.Add(employeeTag);
+            await _dbContext.SaveChangesAsync();
+        }
+
+        public async Task RemoveTagFromEmployeeAsync(int employeeId, int tagId)
+        {
+            var employeeTag = await _dbContext.EmployeeTags
+                .FirstOrDefaultAsync(et => et.EmployeeId == employeeId && et.TagId == tagId);
+
+            if (employeeTag != null)
+            {
+                _dbContext.EmployeeTags.Remove(employeeTag);
+                await _dbContext.SaveChangesAsync();
+            }
+        }
+
+        public async Task<IEnumerable<Tag>> GetTagsForEmployeeAsync(int employeeId)
+        {
+            return await _dbContext.EmployeeTags
+                .Where(et => et.EmployeeId == employeeId)
+                .Select(et => et.Tag)
+                .ToListAsync();
         }
     }
 }

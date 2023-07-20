@@ -13,6 +13,6 @@ namespace EmployeeTagManagerApp.Data.Models
 
         public string Phone { get; set; }
 
-        public ICollection<Tag> Tags { get; set; } = new List<Tag>();
+        public ICollection<EmployeeTag> EmployeeTags { get; set; } = new List<EmployeeTag>();
     }
 }
