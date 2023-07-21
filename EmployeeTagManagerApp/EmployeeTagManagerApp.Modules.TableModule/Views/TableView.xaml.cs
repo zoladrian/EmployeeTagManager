@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace EmployeeTagManagerApp.Modules.ModuleName.Views
+namespace EmployeeTagManagerApp.Modules.TableModule.Views
 {
     /// <summary>
     /// Interaction logic for ViewA.xaml
     /// </summary>
-    public partial class ViewA : UserControl
+    public partial class TableView : UserControl
     {
-        public ViewA()
+        public TableView()
         {
             InitializeComponent();
         }

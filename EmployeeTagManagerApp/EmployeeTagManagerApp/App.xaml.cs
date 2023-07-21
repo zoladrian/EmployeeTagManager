@@ -4,8 +4,9 @@ using EmployeeTagManagerApp.Data.Factory.Validators;
 using EmployeeTagManagerApp.Data.Interfaces;
 using EmployeeTagManagerApp.Data.Models;
 using EmployeeTagManagerApp.Interfaces;
-using EmployeeTagManagerApp.Modules.ModuleName;
+using EmployeeTagManagerApp.Modules.TableModule;
 using EmployeeTagManagerApp.Services;
+using EmployeeTagManagerApp.Services.EmployeeTagManagerApp.Services;
 using EmployeeTagManagerApp.Services.Interfaces;
 using EmployeeTagManagerApp.Views;
 using FluentValidation;
@@ -29,6 +30,8 @@ namespace EmployeeTagManagerApp
         {
             containerRegistry.Register<IValidator<Employee>, EmployeeValidator>();
             containerRegistry.Register<IFileDialogService, OpenFileDialogService>();
+            containerRegistry.Register<IEmployeeService, EmployeeService>();
+            containerRegistry.Register<ITagService, TagService>();
 
             containerRegistry.RegisterScoped<IEmployeeFactory, EmployeeFactory>();
             containerRegistry.RegisterScoped<IDatabaseInitializer, DatabaseInitializer>();
@@ -44,7 +47,7 @@ namespace EmployeeTagManagerApp
 
         protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)
         {
-            moduleCatalog.AddModule<ModuleNameModule>();
+            moduleCatalog.AddModule<TableModule>();
 
         }
         protected override async void OnInitialized()

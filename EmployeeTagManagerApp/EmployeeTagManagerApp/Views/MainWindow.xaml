@@ -32,6 +32,6 @@
             </Grid>
         </materialDesign:Card>
 
-        <ContentControl prism:RegionManager.RegionName="{x:Static core:RegionNames.ContentRegion}" Grid.Row="1"/>
+        <ContentControl prism:RegionManager.RegionName="{x:Static core:RegionNames.TableRegion}" Grid.Row="1"/>
     </Grid>
 </Window>

@@ -15,7 +15,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EmployeeTagManagerApp.Core\EmployeeTagManagerApp.Core.csproj" />
-    <ProjectReference Include="..\Modules\EmployeeTagManagerApp.Modules.ModuleName\EmployeeTagManagerApp.Modules.ModuleName.csproj" />
+    <ProjectReference Include="..\EmployeeTagManagerApp.Modules.TableModule\EmployeeTagManagerApp.Modules.TableModule.csproj" />
     <ProjectReference Include="..\Services\EmployeeTagManagerApp.Services.Interfaces\EmployeeTagManagerApp.Services.Interfaces.csproj" />
     <ProjectReference Include="..\Services\EmployeeTagManagerApp.Services\EmployeeTagManagerApp.Services.csproj" />
   </ItemGroup>

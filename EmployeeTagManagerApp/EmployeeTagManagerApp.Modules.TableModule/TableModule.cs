@@ -1,28 +1,28 @@
 ﻿using EmployeeTagManagerApp.Core;
-using EmployeeTagManagerApp.Modules.ModuleName.Views;
+using EmployeeTagManagerApp.Modules.TableModule.Views;
 using Prism.Ioc;
 using Prism.Modularity;
 using Prism.Regions;
 
-namespace EmployeeTagManagerApp.Modules.ModuleName
+namespace EmployeeTagManagerApp.Modules.TableModule
 {
-    public class ModuleNameModule : IModule
+    public class TableModule : IModule
     {
         private readonly IRegionManager _regionManager;
 
-        public ModuleNameModule(IRegionManager regionManager)
+        public TableModule(IRegionManager regionManager)
         {
             _regionManager = regionManager;
         }
 
         public void OnInitialized(IContainerProvider containerProvider)
         {
-            _regionManager.RequestNavigate(RegionNames.ContentRegion, "ViewA");
+            _regionManager.RequestNavigate(RegionNames.TableRegion, "TableView");
         }
 
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            containerRegistry.RegisterForNavigation<ViewA>();
+            containerRegistry.RegisterForNavigation<TableView>();
         }
     }
 }
