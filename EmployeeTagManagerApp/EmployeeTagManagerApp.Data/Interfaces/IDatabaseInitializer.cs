@@ -2,6 +2,6 @@
 {
     public interface IDatabaseInitializer
     {
-        Task InitializeAsync();
+        Task InitializeAsync(string path);
     }
 }

@@ -21,14 +21,12 @@ namespace EmployeeTagManagerApp.Data
             _employeeFactory = employeeFactory;
         }
 
-        public async Task InitializeAsync()
+        public async Task InitializeAsync(string path)
         {
             await _dbContext.Database.EnsureCreatedAsync();
 
             if (!_dbContext.Employees.Any())
             {
-
-                string path = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Data", "employes.csv");
                 string csvFileData;
                 using (StreamReader sr = new StreamReader(path))
                 {

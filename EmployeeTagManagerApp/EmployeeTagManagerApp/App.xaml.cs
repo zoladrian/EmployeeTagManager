@@ -3,6 +3,7 @@ using EmployeeTagManagerApp.Data.Factory;
 using EmployeeTagManagerApp.Data.Factory.Validators;
 using EmployeeTagManagerApp.Data.Interfaces;
 using EmployeeTagManagerApp.Data.Models;
+using EmployeeTagManagerApp.Interfaces;
 using EmployeeTagManagerApp.Modules.ModuleName;
 using EmployeeTagManagerApp.Services;
 using EmployeeTagManagerApp.Services.Interfaces;
@@ -27,11 +28,12 @@ namespace EmployeeTagManagerApp
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.Register<IValidator<Employee>, EmployeeValidator>();
+            containerRegistry.Register<IFileDialogService, OpenFileDialogService>();
 
             containerRegistry.RegisterScoped<IEmployeeFactory, EmployeeFactory>();
+            containerRegistry.RegisterScoped<IDatabaseInitializer, DatabaseInitializer>();
 
             containerRegistry.RegisterSingleton<IEmployeeService, EmployeeService>();
-            containerRegistry.RegisterSingleton<IDatabaseInitializer, DatabaseInitializer>();
             containerRegistry.RegisterSingleton<ManagerDbContext>(sp =>
             {
                 var optionsBuilder = new DbContextOptionsBuilder<ManagerDbContext>();
@@ -47,9 +49,6 @@ namespace EmployeeTagManagerApp
         }
         protected override async void OnInitialized()
         {
-            var databaseInitializer = Container.Resolve<IDatabaseInitializer>();
-            await databaseInitializer.InitializeAsync();
-
             base.OnInitialized();
         }
 

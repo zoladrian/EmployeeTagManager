@@ -1,19 +1,31 @@
-﻿using Prism.Mvvm;
+﻿using EmployeeTagManagerApp.Data.Interfaces;
+using EmployeeTagManagerApp.Interfaces;
+using Prism.Commands;
+using Prism.Mvvm;
+using System;
 
 namespace EmployeeTagManagerApp.ViewModels
 {
     public class MainWindowViewModel : BindableBase
     {
-        private string _title = "Prism Application";
-        public string Title
+        private readonly IFileDialogService _fileDialogService;
+        private readonly IDatabaseInitializer _databaseInitializer;
+        public MainWindowViewModel(IFileDialogService fileDialogService, IDatabaseInitializer databaseInitializer)
         {
-            get { return _title; }
-            set { SetProperty(ref _title, value); }
+            _databaseInitializer= databaseInitializer;
+            _fileDialogService = fileDialogService ?? throw new ArgumentNullException(nameof(fileDialogService));
+            LoadCommand = new DelegateCommand(OnLoadCommandExecuted);
         }
 
-        public MainWindowViewModel()
-        {
+        public DelegateCommand LoadCommand { get; }
 
+        private void OnLoadCommandExecuted()
+        {
+            string filePath = _fileDialogService.ShowOpenFileDialog();
+            if (filePath != null)
+            {
+                _databaseInitializer.InitializeAsync(filePath);
+            }
         }
     }
 }
