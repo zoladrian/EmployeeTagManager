@@ -6,15 +6,18 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using EmployeeTagManagerApp.Data.Models;
 using System.Linq;
+using Prism.Events;
 
 namespace EmployeeTagManagerApp.Services
 {
     public class EmployeeService : IEmployeeService
     {
         private readonly ManagerDbContext _dbContext;
+        private readonly IEventAggregator _eventAggregator;
 
-        public EmployeeService(ManagerDbContext dbContext)
+        public EmployeeService(ManagerDbContext dbContext, IEventAggregator eventAggregator)
         {
+            _eventAggregator = eventAggregator;
             _dbContext = dbContext;
         }
 

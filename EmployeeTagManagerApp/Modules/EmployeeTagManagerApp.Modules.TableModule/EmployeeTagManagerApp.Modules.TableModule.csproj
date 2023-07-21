@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Prism.Wpf" Version="8.1.97" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\EmployeeTagManagerApp.Core\EmployeeTagManagerApp.Core.csproj" />
+    <ProjectReference Include="..\..\EmployeeTagManagerApp.Data\EmployeeTagManagerApp.Data.csproj" />
+    <ProjectReference Include="..\..\Services\EmployeeTagManagerApp.Services.Interfaces\EmployeeTagManagerApp.Services.Interfaces.csproj" />
+  </ItemGroup>
+</Project>

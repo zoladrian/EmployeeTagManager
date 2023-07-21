@@ -8,6 +8,8 @@ using System.Reflection;
 using System.Text;
 using EmployeeTagManagerApp.Data.Factory;
 using EmployeeTagManagerApp.Data.Interfaces;
+using Prism.Events;
+using EmployeeTagManagerApp.Events;
 
 namespace EmployeeTagManagerApp.Data
 {
@@ -15,10 +17,12 @@ namespace EmployeeTagManagerApp.Data
     {
         private readonly ManagerDbContext _dbContext;
         private readonly IEmployeeFactory _employeeFactory;
-        public DatabaseInitializer(ManagerDbContext dbContext, IEmployeeFactory employeeFactory)
+        private readonly IEventAggregator _eventAggregator;
+        public DatabaseInitializer(ManagerDbContext dbContext, IEmployeeFactory employeeFactory, IEventAggregator eventAggregator)
         {
             _dbContext = dbContext;
             _employeeFactory = employeeFactory;
+            _eventAggregator = eventAggregator;
         }
 
         public async Task InitializeAsync(string path)
@@ -47,8 +51,8 @@ namespace EmployeeTagManagerApp.Data
                 sb.Append("SET IDENTITY_INSERT [dbo].[Employees] OFF;");
 
                 _dbContext.Database.ExecuteSqlRaw(sb.ToString());
-
             }
+            _eventAggregator.GetEvent<DatabaseChangedEvent>().Publish();
         }
 
     }

@@ -1,12 +1,10 @@
 ﻿using EmployeeTagManagerApp.Data.Models;
 using EmployeeTagManagerApp.Services.Interfaces;
 using Prism.Commands;
+using Prism.Events;
 using Prism.Mvvm;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
+using EmployeeTagManagerApp.Events;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
@@ -19,12 +17,12 @@ namespace EmployeeTagManagerApp.Modules.TableModule.ViewModels
         private ObservableCollection<Employee> _employees;
         private Employee _selectedEmployee;
 
-        public TableViewModel(IEmployeeService employeeService, ITagService tagService)
+        public TableViewModel(IEmployeeService employeeService, ITagService tagService, IEventAggregator eventAggregator)
         {
             _employeeService = employeeService;
             _tagService = tagService;
 
-            LoadDataCommand = new DelegateCommand(async () => await LoadDataAsync());
+            eventAggregator.GetEvent<DatabaseChangedEvent>().Subscribe(() => LoadDataAsync());
             EditCommand = new DelegateCommand<Employee>(EditEmployee, CanEditOrDelete).ObservesProperty(() => SelectedEmployee);
             DeleteCommand = new DelegateCommand<Employee>(DeleteEmployee, CanEditOrDelete).ObservesProperty(() => SelectedEmployee);
         }
