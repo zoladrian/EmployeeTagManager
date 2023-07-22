@@ -37,12 +37,6 @@ namespace EmployeeTagManagerApp.Services
                 .FirstOrDefaultAsync(e => e.Id == id);
         }
 
-        public async Task CreateEmployeeAsync(Employee employee)
-        {
-            _dbContext.Employees.Add(employee);
-            await _dbContext.SaveChangesAsync();
-        }
-
         public async Task UpdateEmployeeAsync(Employee employee)
         {
             _dbContext.Employees.Update(employee);

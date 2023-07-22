@@ -7,6 +7,8 @@ using System.Collections.ObjectModel;
 using EmployeeTagManagerApp.Events;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Prism.Services.Dialogs;
+using System.Windows;
 
 namespace EmployeeTagManagerApp.Modules.TableModule.ViewModels
 {
@@ -14,17 +16,19 @@ namespace EmployeeTagManagerApp.Modules.TableModule.ViewModels
     {
         private readonly IEmployeeService _employeeService;
         private readonly ITagService _tagService;
+        private readonly IDialogService _dialogService;
         private ObservableCollection<Employee> _employees;
         private Employee _selectedEmployee;
 
-        public TableViewModel(IEmployeeService employeeService, ITagService tagService, IEventAggregator eventAggregator)
+        public TableViewModel(IEmployeeService employeeService, ITagService tagService, IEventAggregator eventAggregator, IDialogService dialogService)
         {
             _employeeService = employeeService;
             _tagService = tagService;
+            _dialogService= dialogService;
 
             eventAggregator.GetEvent<DatabaseChangedEvent>().Subscribe(() => LoadDataAsync());
-            EditCommand = new DelegateCommand<Employee>(EditEmployee, CanEditOrDelete).ObservesProperty(() => SelectedEmployee);
-            DeleteCommand = new DelegateCommand<Employee>(DeleteEmployee, CanEditOrDelete).ObservesProperty(() => SelectedEmployee);
+            EditCommand = new DelegateCommand<Employee>(EditEmployee).ObservesProperty(() => SelectedEmployee);
+            DeleteCommand = new DelegateCommand<Employee>(DeleteEmployee).ObservesProperty(() => SelectedEmployee);
         }
 
         public ObservableCollection<Employee> Employees
@@ -51,17 +55,27 @@ namespace EmployeeTagManagerApp.Modules.TableModule.ViewModels
 
         private void EditEmployee(Employee employee)
         {
-            // Logic for editing the employee
+            var parameters = new DialogParameters
+            {
+                { "employee", employee }
+            };
+            _dialogService.ShowDialog("EditEmployeeDialog", parameters, async r =>
+            {
+                if (r.Result == ButtonResult.OK)
+                {
+                    var updatedEmployee = r.Parameters.GetValue<Employee>("employee");
+                    Application.Current.Dispatcher.Invoke(async () =>
+                    {
+                        await _employeeService.UpdateEmployeeAsync(updatedEmployee);
+                    });
+                }
+            });
         }
+
 
         private void DeleteEmployee(Employee employee)
         {
             // Logic for deleting the employee
-        }
-
-        private bool CanEditOrDelete(Employee employee)
-        {
-            return employee != null;
         }
     }
 

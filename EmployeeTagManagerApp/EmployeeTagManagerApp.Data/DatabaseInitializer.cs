@@ -1,12 +1,5 @@
-﻿using EmployeeTagManagerApp.Data;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using EmployeeTagManagerApp.Data.Models;
-using System.Reflection;
+﻿using Microsoft.EntityFrameworkCore;
 using System.Text;
-using EmployeeTagManagerApp.Data.Factory;
 using EmployeeTagManagerApp.Data.Interfaces;
 using Prism.Events;
 using EmployeeTagManagerApp.Events;

@@ -4,6 +4,8 @@ using EmployeeTagManagerApp.Data.Factory.Validators;
 using EmployeeTagManagerApp.Data.Interfaces;
 using EmployeeTagManagerApp.Data.Models;
 using EmployeeTagManagerApp.Interfaces;
+using EmployeeTagManagerApp.Modules.EditEmployeeModule.ViewModels;
+using EmployeeTagManagerApp.Modules.EditEmployeeModule.Views;
 using EmployeeTagManagerApp.Modules.TableModule;
 using EmployeeTagManagerApp.Services;
 using EmployeeTagManagerApp.Services.EmployeeTagManagerApp.Services;
@@ -43,6 +45,8 @@ namespace EmployeeTagManagerApp
                 optionsBuilder.UseSqlServer("Server=localhost;Database=EmployeeTagManagerDatabase;Trusted_Connection=True;TrustServerCertificate=True;");
                 return new ManagerDbContext(optionsBuilder.Options);
             });
+
+            containerRegistry.RegisterDialog<EditEmployeeDialogView>("EditEmployeeDialog");
         }
 
         protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)

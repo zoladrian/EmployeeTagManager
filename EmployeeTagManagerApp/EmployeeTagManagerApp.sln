@@ -23,6 +23,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmployeeTagManagerApp.Event
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmployeeTagManagerApp.Modules.TableModule", "Modules\EmployeeTagManagerApp.Modules.TableModule\EmployeeTagManagerApp.Modules.TableModule.csproj", "{BB716CCA-4F84-42F5-8C9E-7497E2274A31}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmployeeTagManagerApp.Modules.EditEmployeeModule", "EmployeeTagManagerApp.Modules.EditEmployeeModule\EmployeeTagManagerApp.Modules.EditEmployeeModule.csproj", "{8B2B4A45-E5CC-49A5-8EFD-87AF8D85120C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -57,6 +59,10 @@ Global
 		{BB716CCA-4F84-42F5-8C9E-7497E2274A31}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BB716CCA-4F84-42F5-8C9E-7497E2274A31}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BB716CCA-4F84-42F5-8C9E-7497E2274A31}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8B2B4A45-E5CC-49A5-8EFD-87AF8D85120C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B2B4A45-E5CC-49A5-8EFD-87AF8D85120C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B2B4A45-E5CC-49A5-8EFD-87AF8D85120C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B2B4A45-E5CC-49A5-8EFD-87AF8D85120C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -65,6 +71,7 @@ Global
 		{3C6CA407-EA10-45DC-8946-072AD9B20E53} = {8287AE9A-8669-4D12-9F7E-A45984C4868D}
 		{F83ED14B-46CD-4F74-9471-EADFA11114A1} = {8287AE9A-8669-4D12-9F7E-A45984C4868D}
 		{BB716CCA-4F84-42F5-8C9E-7497E2274A31} = {62485C64-4358-4D70-B273-FB5767460312}
+		{8B2B4A45-E5CC-49A5-8EFD-87AF8D85120C} = {62485C64-4358-4D70-B273-FB5767460312}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {62AEB4E5-C313-43E1-A783-7F52854F109B}

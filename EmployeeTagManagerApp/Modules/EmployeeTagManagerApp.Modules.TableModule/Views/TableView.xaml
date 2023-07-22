@@ -13,28 +13,35 @@
 
     <Grid>
         <DataGrid ItemsSource="{Binding Employees}"
-                  AutoGenerateColumns="False"
-                  CanUserAddRows="False"
-                  RowDetailsVisibilityMode="VisibleWhenSelected"
-                  HorizontalAlignment="Center">
+          AutoGenerateColumns="False"
+          CanUserAddRows="False"
+          RowDetailsVisibilityMode="VisibleWhenSelected"
+          HorizontalAlignment="Center">
 
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
-                <DataGridTextColumn Header="Surname" Binding="{Binding Surname}"/>
-                <DataGridTextColumn Header="Email" Binding="{Binding Email}"/>
-                <DataGridTextColumn Header="Phone" Binding="{Binding Phone}"/>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" IsReadOnly="True" />
+                <DataGridTextColumn Header="Surname" Binding="{Binding Surname}" IsReadOnly="True" />
+                <DataGridTextColumn Header="Email" Binding="{Binding Email}" IsReadOnly="True" />
+                <DataGridTextColumn Header="Phone" Binding="{Binding Phone}" IsReadOnly="True" />
 
                 <DataGridTemplateColumn Header="Actions">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
-                                <Button Content="Edit" Command="{Binding EditCommand}" Margin="5"/>
-                                <Button Content="Delete" Command="{Binding DeleteCommand}" Margin="5"/>
+                                <Button Content="Edit" 
+                                Command="{Binding Path=DataContext.EditCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" 
+                                CommandParameter="{Binding}" 
+                                Margin="5"/>
+                                <Button Content="Delete" 
+                                Command="{Binding Path=DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" 
+                                CommandParameter="{Binding}" 
+                                Margin="5"/>
                             </StackPanel>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
+
     </Grid>
 </UserControl>

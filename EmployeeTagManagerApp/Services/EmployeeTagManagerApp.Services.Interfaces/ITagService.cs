@@ -13,7 +13,6 @@ namespace EmployeeTagManagerApp.Services.Interfaces
         Task CreateTagAsync(Tag tag);
 
         Task UpdateTagAsync(Tag tag);
-
         Task DeleteTagAsync(int id);
     }
 }
