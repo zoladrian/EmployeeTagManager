@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33205.214
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{1D3AA8D8-1858-4770-95F2-0D02363B90A8}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules", "Modules", "{62485C64-4358-4D70-B273-FB5767460312}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{8287AE9A-8669-4D12-9F7E-A45984C4868D}"
@@ -23,7 +21,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmployeeTagManagerApp.Event
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmployeeTagManagerApp.Modules.TableModule", "Modules\EmployeeTagManagerApp.Modules.TableModule\EmployeeTagManagerApp.Modules.TableModule.csproj", "{BB716CCA-4F84-42F5-8C9E-7497E2274A31}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmployeeTagManagerApp.Modules.EditEmployeeModule", "EmployeeTagManagerApp.Modules.EditEmployeeModule\EmployeeTagManagerApp.Modules.EditEmployeeModule.csproj", "{8B2B4A45-E5CC-49A5-8EFD-87AF8D85120C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmployeeTagManagerApp.Modules.EditEmployeeModule", "EmployeeTagManagerApp.Modules.EditEmployeeModule\EmployeeTagManagerApp.Modules.EditEmployeeModule.csproj", "{8B2B4A45-E5CC-49A5-8EFD-87AF8D85120C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmployeeTagManagerApp.Tests", "EmployeeTagManagerApp.Tests\EmployeeTagManagerApp.Tests.csproj", "{AD72107D-18DC-4ED3-B0CC-AB86FD7193CB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -63,6 +63,10 @@ Global
 		{8B2B4A45-E5CC-49A5-8EFD-87AF8D85120C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8B2B4A45-E5CC-49A5-8EFD-87AF8D85120C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8B2B4A45-E5CC-49A5-8EFD-87AF8D85120C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD72107D-18DC-4ED3-B0CC-AB86FD7193CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD72107D-18DC-4ED3-B0CC-AB86FD7193CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD72107D-18DC-4ED3-B0CC-AB86FD7193CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD72107D-18DC-4ED3-B0CC-AB86FD7193CB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
