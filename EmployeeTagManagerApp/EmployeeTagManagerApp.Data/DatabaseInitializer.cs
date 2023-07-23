@@ -3,6 +3,10 @@ using System.Text;
 using EmployeeTagManagerApp.Data.Interfaces;
 using Prism.Events;
 using EmployeeTagManagerApp.Events;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
+using EmployeeTagManagerApp.Data.Models;
 
 namespace EmployeeTagManagerApp.Data
 {
@@ -11,6 +15,7 @@ namespace EmployeeTagManagerApp.Data
         private readonly ManagerDbContext _dbContext;
         private readonly IEmployeeFactory _employeeFactory;
         private readonly IEventAggregator _eventAggregator;
+
         public DatabaseInitializer(ManagerDbContext dbContext, IEmployeeFactory employeeFactory, IEventAggregator eventAggregator)
         {
             _dbContext = dbContext;
@@ -27,26 +32,30 @@ namespace EmployeeTagManagerApp.Data
                 string csvFileData;
                 using (StreamReader sr = new StreamReader(path))
                 {
-                    csvFileData = sr.ReadToEnd();
+                    csvFileData = await sr.ReadToEndAsync();
                 }
 
                 var csvLines = csvFileData.Split('\n').Skip(1);
 
-                StringBuilder sb = new StringBuilder();
-                sb.Append("SET IDENTITY_INSERT [dbo].[Employees] ON;");
                 foreach (var line in csvLines)
                 {
                     var values = line.Split(',');
                     var employee = _employeeFactory.Create(values);
 
-                    sb.Append($"INSERT INTO [dbo].[Employees] (Id, Name, Surname, Email, Phone) VALUES ({employee.Id}, '{employee.Name}', '{employee.Surname}', '{employee.Email}', '{employee.Phone}');");
+                    _dbContext.Employees.Add(new Employee
+                    {
+                        Id = employee.Id,
+                        Name = employee.Name,
+                        Surname = employee.Surname,
+                        Email = employee.Email,
+                        Phone = employee.Phone
+                    });
                 }
-                sb.Append("SET IDENTITY_INSERT [dbo].[Employees] OFF;");
 
-                _dbContext.Database.ExecuteSqlRaw(sb.ToString());
+                await _dbContext.SaveChangesAsync();
             }
+
             _eventAggregator.GetEvent<DatabaseChangedEvent>().Publish();
         }
-
     }
 }
