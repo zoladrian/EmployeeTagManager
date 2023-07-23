@@ -27,10 +27,12 @@
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
                                 <Button Content="Edit" 
+                                Style="{StaticResource MaterialDesignFlatButton}"
                                 Command="{Binding Path=DataContext.EditCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" 
                                 CommandParameter="{Binding}" 
                                 Margin="5"/>
                                 <Button Content="Delete" 
+                                Style="{StaticResource MaterialDesignFlatButton}"
                                 Command="{Binding Path=DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" 
                                 CommandParameter="{Binding}" 
                                 Margin="5"/>

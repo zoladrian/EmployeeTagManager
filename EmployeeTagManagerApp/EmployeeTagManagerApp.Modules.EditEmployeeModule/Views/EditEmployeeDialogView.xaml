@@ -45,7 +45,11 @@
                     <GridViewColumn Header="Action">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <Button Content="Delete" Command="{Binding DataContext.DeleteTagCommand, RelativeSource={RelativeSource AncestorType=ListView}}" CommandParameter="{Binding Tag}"/>
+                                <Button 
+                                    Style="{StaticResource MaterialDesignFlatButton}"
+                                    Content="Delete" 
+                                    Command="{Binding DataContext.DeleteTagCommand, RelativeSource={RelativeSource AncestorType=ListView}}" 
+                                    CommandParameter="{Binding Tag}"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
@@ -70,8 +74,13 @@
                 Margin="10"/>
 
             <TextBox Grid.Column="1" Text="{Binding NewTagDescription}" Margin="10"/>
-            <Button Grid.Column="2" Content="Add Tag" Margin="5" Command="{Binding AddTagCommand}"/>
+            <Button 
+                Style="{StaticResource MaterialDesignFlatButton}"
+                Grid.Column="2" 
+                Content="Add Tag" 
+                Margin="5" 
+                Command="{Binding AddTagCommand}"/>
         </Grid>
-        <Button Grid.Row="10" Content="Ok" Margin="5" Command="{Binding OkCommand}"/>
+        <Button Style="{StaticResource MaterialDesignPaperButton}" Grid.Row="10" Content="Ok" Margin="5" Command="{Binding OkCommand}"/>
     </Grid>
 </UserControl>
