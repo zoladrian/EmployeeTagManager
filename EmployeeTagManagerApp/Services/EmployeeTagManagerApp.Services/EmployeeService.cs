@@ -32,16 +32,25 @@ namespace EmployeeTagManagerApp.Services
         public async Task<Employee> GetEmployeeByIdAsync(int id)
         {
             return await _dbContext.Employees
-                .Include(e => e.EmployeeTags)
-                .ThenInclude(et => et.Tag)
+                .AsNoTracking()
                 .FirstOrDefaultAsync(e => e.Id == id);
         }
 
         public async Task UpdateEmployeeAsync(Employee employee)
         {
-            _dbContext.Employees.Update(employee);
-            await _dbContext.SaveChangesAsync();
+            var existingEmployee = await _dbContext.Employees.FirstOrDefaultAsync(e => e.Id == employee.Id);
+
+            if (existingEmployee != null)
+            {
+                existingEmployee.Name = employee.Name;
+                existingEmployee.Surname = employee.Surname;
+                existingEmployee.Email = employee.Email;
+                existingEmployee.Phone = employee.Phone;
+                existingEmployee.EmployeeTags = employee.EmployeeTags;
+                await _dbContext.SaveChangesAsync();
+            }
         }
+
 
         public async Task DeleteEmployeeAsync(int id)
         {

@@ -1,8 +1,7 @@
 ﻿using EmployeeTagManagerApp.Data;
-using EmployeeTagManagerApp.Data.Factory;
-using EmployeeTagManagerApp.Data.Factory.Validators;
 using EmployeeTagManagerApp.Data.Interfaces;
 using EmployeeTagManagerApp.Data.Models;
+using EmployeeTagManagerApp.Data.Validators;
 using EmployeeTagManagerApp.Interfaces;
 using EmployeeTagManagerApp.Modules.EditEmployeeModule.ViewModels;
 using EmployeeTagManagerApp.Modules.EditEmployeeModule.Views;
@@ -31,6 +30,7 @@ namespace EmployeeTagManagerApp
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.Register<IValidator<Employee>, EmployeeValidator>();
+            containerRegistry.Register<IValidator<Tag>, TagValidator>();
             containerRegistry.Register<IFileDialogService, OpenFileDialogService>();
             containerRegistry.Register<IEmployeeService, EmployeeService>();
             containerRegistry.Register<ITagService, TagService>();
@@ -48,6 +48,7 @@ namespace EmployeeTagManagerApp
 
             containerRegistry.RegisterDialog<EditEmployeeDialogView>("EditEmployeeDialog");
         }
+
 
         protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)
         {

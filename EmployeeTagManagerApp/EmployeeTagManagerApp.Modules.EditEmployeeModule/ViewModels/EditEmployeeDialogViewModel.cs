@@ -6,42 +6,53 @@ using Prism.Services.Dialogs;
 using System;
 using System.Linq;
 using System.Collections.ObjectModel;
+using EmployeeTagManagerApp.Data.Validators;
+using FluentValidation;
+using System.Collections.Generic;
 
 namespace EmployeeTagManagerApp.Modules.EditEmployeeModule.ViewModels
 {
     public class EditEmployeeDialogViewModel : BindableBase, IDialogAware
     {
-        private Employee _employee;
-        private IEmployeeService _employeeService;
-        private ITagService _tagService;
-        private readonly IDialogService _dialogService;
+        private EmployeeViewModel _employee;
+        private readonly IEmployeeService _employeeService;
+        private readonly ITagService _tagService;
+        private readonly EmployeeValidator _employeeValidator;
+        private readonly TagValidator _tagValidator;
         private string _newTagName;
         private string _newTagDescription;
         private Tag _selectedTag;
         private ObservableCollection<Tag> _availableTags;
         private ObservableCollection<EmployeeTag> _employeeTags;
 
-        public EditEmployeeDialogViewModel(IDialogService dialogService, IEmployeeService employeeService, ITagService tagService)
+        public EditEmployeeDialogViewModel(IEmployeeService employeeService, ITagService tagService, TagValidator tagValidator, EmployeeValidator employeeValidator)
         {
             _employeeService = employeeService;
-            _dialogService = dialogService;
             _tagService = tagService;
             AddTagCommand = new DelegateCommand(AddTag, CanAddTag)
                 .ObservesProperty(() => NewTagName)
-                .ObservesProperty(() => NewTagDescription);
+                .ObservesProperty(() => NewTagDescription)
+                .ObservesProperty(() => SelectedTag);
+            OkCommand = new DelegateCommand(OnOk, CanOk)
+                .ObservesProperty(() => Employee.Name)
+                .ObservesProperty(() => Employee.Surname)
+                .ObservesProperty(() => Employee.Email)
+                .ObservesProperty(() => Employee.Phone);
             DeleteTagCommand = new DelegateCommand<Tag>(DeleteTag);
-        }
-
-        public Employee Employee
-        {
-            get { return _employee; }
-            set { SetProperty(ref _employee, value); }
+            _tagValidator = tagValidator;
+            _employeeValidator= employeeValidator;
         }
 
         public ObservableCollection<EmployeeTag> EmployeeTags
         {
             get { return _employeeTags; }
             set { SetProperty(ref _employeeTags, value); }
+        }
+
+        public EmployeeViewModel Employee
+        {
+            get { return _employee; }
+            set { SetProperty(ref _employee, value); }
         }
 
         public ObservableCollection<Tag> AvailableTags
@@ -83,6 +94,8 @@ namespace EmployeeTagManagerApp.Modules.EditEmployeeModule.ViewModels
             }
         }
         public DelegateCommand AddTagCommand { get; }
+
+        public DelegateCommand OkCommand { get; }
         public DelegateCommand<Tag> DeleteTagCommand { get; }
 
         public string Title => "Edit Employee";
@@ -96,18 +109,24 @@ namespace EmployeeTagManagerApp.Modules.EditEmployeeModule.ViewModels
 
         public void OnDialogClosed()
         {
-            var dialogParameters = new DialogParameters
-            {
-                { "employee", Employee }
-            };
-            RequestClose?.Invoke(new DialogResult(ButtonResult.OK, dialogParameters));
         }
 
         public void OnDialogOpened(IDialogParameters parameters)
         {
-            Employee = parameters.GetValue<Employee>("employee");
+            Employee = new EmployeeViewModel(parameters.GetValue<Employee>("employee"));
             EmployeeTags = new ObservableCollection<EmployeeTag>(Employee.EmployeeTags);
             LoadAvailableTags();
+        }
+        private void OnOk()
+        {
+            Employee employeeToUpdate = new Employee();
+            UpdateEmployee(employeeToUpdate);
+
+            var dialogParameters = new DialogParameters
+            {
+                { "employee", employeeToUpdate }
+            };
+            RequestClose?.Invoke(new DialogResult(ButtonResult.OK, dialogParameters));
         }
         private async void UpdateTagDescription(Tag tag)
         {
@@ -149,12 +168,25 @@ namespace EmployeeTagManagerApp.Modules.EditEmployeeModule.ViewModels
 
             LoadAvailableTags();
         }
-
-
+        private bool CanOk()
+        {
+            if (Employee != null)
+            {
+                var validationResult = _employeeValidator.Validate(ToEmployee());
+                return validationResult.IsValid;
+            }
+            return false;
+        }
 
         private bool CanAddTag()
         {
-            return !string.IsNullOrWhiteSpace(NewTagName) && !string.IsNullOrWhiteSpace(NewTagDescription);
+            if (!string.IsNullOrWhiteSpace(NewTagName) && !string.IsNullOrWhiteSpace(NewTagDescription))
+            {
+                var tag = new Tag { Name = NewTagName, Description = NewTagDescription };
+                var validationResult = _tagValidator.Validate(tag);
+                return validationResult.IsValid;
+            }
+            return false;
         }
 
         private async void DeleteTag(Tag tag)
@@ -166,6 +198,33 @@ namespace EmployeeTagManagerApp.Modules.EditEmployeeModule.ViewModels
                 EmployeeTags.Remove(tagToRemove);
                 LoadAvailableTags();
             }
+        }
+        public void UpdateEmployee(Employee employeeToUpdate)
+        {
+            employeeToUpdate.Id = Employee.Id;
+            employeeToUpdate.Name = Employee.Name;
+            employeeToUpdate.Surname = Employee.Surname;
+            employeeToUpdate.Email = Employee.Email;
+            employeeToUpdate.Phone = Employee.Phone;
+            employeeToUpdate.EmployeeTags = new List<EmployeeTag>(_employeeTags.Select(et => new EmployeeTag
+            {
+                EmployeeId = et.EmployeeId,
+                TagId = et.TagId,
+                Employee = et.Employee,
+                Tag = et.Tag
+            }));
+        }
+        public Employee ToEmployee()
+        {
+            return new Employee
+            {
+                Id = Employee.Id,
+                Name = Employee.Name,
+                Surname = Employee.Surname,
+                Email = Employee.Email,
+                Phone = Employee.Phone,
+                EmployeeTags = this.EmployeeTags
+            };
         }
     }
 }

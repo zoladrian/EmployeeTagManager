@@ -9,21 +9,20 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Prism.Services.Dialogs;
 using System.Windows;
+using System.Linq;
 
 namespace EmployeeTagManagerApp.Modules.TableModule.ViewModels
 {
     public class TableViewModel : BindableBase
     {
         private readonly IEmployeeService _employeeService;
-        private readonly ITagService _tagService;
         private readonly IDialogService _dialogService;
         private ObservableCollection<Employee> _employees;
         private Employee _selectedEmployee;
 
-        public TableViewModel(IEmployeeService employeeService, ITagService tagService, IEventAggregator eventAggregator, IDialogService dialogService)
+        public TableViewModel(IEmployeeService employeeService, IEventAggregator eventAggregator, IDialogService dialogService)
         {
             _employeeService = employeeService;
-            _tagService = tagService;
             _dialogService= dialogService;
 
             eventAggregator.GetEvent<DatabaseChangedEvent>().Subscribe(() => LoadDataAsync());
@@ -56,21 +55,34 @@ namespace EmployeeTagManagerApp.Modules.TableModule.ViewModels
         private void EditEmployee(Employee employee)
         {
             var parameters = new DialogParameters
-            {
-                { "employee", employee }
-            };
+    {
+        { "employee", employee }
+    };
+
             _dialogService.ShowDialog("EditEmployeeDialog", parameters, async r =>
             {
                 if (r.Result == ButtonResult.OK)
                 {
                     var updatedEmployee = r.Parameters.GetValue<Employee>("employee");
-                    Application.Current.Dispatcher.Invoke(async () =>
+
+                    var employeeToEdit = Employees.FirstOrDefault(e => e.Id == updatedEmployee.Id);
+                    if (employeeToEdit != null)
                     {
+                        Application.Current.Dispatcher.Invoke(() =>
+                        {
+                            int index = Employees.IndexOf(employeeToEdit);
+                            Employees.Remove(employeeToEdit);
+                            Employees.Insert(index, updatedEmployee);
+                        });
+
                         await _employeeService.UpdateEmployeeAsync(updatedEmployee);
-                    });
+                    }
                 }
             });
         }
+
+
+
         private async void DeleteEmployee(Employee employee)
         {
             if (employee == null) return;

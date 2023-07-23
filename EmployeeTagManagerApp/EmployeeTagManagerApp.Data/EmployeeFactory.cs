@@ -1,11 +1,10 @@
-﻿using EmployeeTagManagerApp.Data.Factory.Validators;
-using EmployeeTagManagerApp.Data.Interfaces;
+﻿using EmployeeTagManagerApp.Data.Interfaces;
 using EmployeeTagManagerApp.Data.Models;
 using FluentValidation;
 using FluentValidation.Results;
 
 
-namespace EmployeeTagManagerApp.Data.Factory
+namespace EmployeeTagManagerApp.Data
 {
     public class EmployeeFactory : IEmployeeFactory
     {

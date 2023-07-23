@@ -1,11 +1,8 @@
 ﻿<UserControl x:Class="EmployeeTagManagerApp.Modules.TableModule.Views.TableView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:EmployeeTagManagerApp.Modules.TableModule.Views"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
-             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300"
              xmlns:prism="http://prismlibrary.com/"
@@ -16,15 +13,16 @@
           AutoGenerateColumns="False"
           CanUserAddRows="False"
           RowDetailsVisibilityMode="VisibleWhenSelected"
-          HorizontalAlignment="Center">
+          HorizontalAlignment="Stretch"
+          VerticalAlignment="Stretch">
 
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Name" Binding="{Binding Name}" IsReadOnly="True" />
-                <DataGridTextColumn Header="Surname" Binding="{Binding Surname}" IsReadOnly="True" />
-                <DataGridTextColumn Header="Email" Binding="{Binding Email}" IsReadOnly="True" />
-                <DataGridTextColumn Header="Phone" Binding="{Binding Phone}" IsReadOnly="True" />
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="2*" IsReadOnly="True" />
+                <DataGridTextColumn Header="Surname" Binding="{Binding Surname}" Width="2*" IsReadOnly="True" />
+                <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="4*" IsReadOnly="True" />
+                <DataGridTextColumn Header="Phone" Binding="{Binding Phone}" Width="2*" IsReadOnly="True" />
 
-                <DataGridTemplateColumn Header="Actions">
+                <DataGridTemplateColumn Header="Actions" Width="3*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
