@@ -13,8 +13,8 @@ namespace EmployeeTagManagerApp.Data.Validators
                 .Matches(@"^[a-zA-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ\s\-\`']*$");
 
             RuleFor(x => x.Description)
-                .Length(1, 255)
-                .Matches(@"^[a-zA-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ\s\-\`']*$");
+                .NotEmpty()
+                .Length(1, 255);
         }
     }
 }

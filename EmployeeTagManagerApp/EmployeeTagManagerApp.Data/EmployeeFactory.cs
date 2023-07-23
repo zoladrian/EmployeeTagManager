@@ -13,26 +13,30 @@ namespace EmployeeTagManagerApp.Data
         {
             _validator = validator;
         }
-
         public Employee Create(string[] values)
         {
             var employee = new Employee
             {
                 Id = int.Parse(values[0]),
-                Name = values[1].Trim(),
-                Surname = values[2].Trim(),
-                Email = values[3].Trim(),
-                Phone = values[4].Trim()
+                Name = CleanInput(values[1]),
+                Surname = CleanInput(values[2]),
+                Email = CleanInput(values[3]),
+                Phone = CleanInput(values[4])
             };
 
             ValidationResult results = _validator.Validate(employee);
 
             if (!results.IsValid)
             {
+                var the = employee;
                 throw new ValidationException(results.Errors);
             }
 
             return employee;
+        }
+        private string CleanInput(string input)
+        {
+            return input.Replace("'", "''").Trim('\r').Trim();
         }
     }
 }

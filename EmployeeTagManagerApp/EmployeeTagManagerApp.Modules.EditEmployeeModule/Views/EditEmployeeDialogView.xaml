@@ -65,7 +65,7 @@
             </Grid.ColumnDefinitions>
 
             <ComboBox Grid.Column="0" 
-                SelectedValue="{Binding NewTagName, UpdateSourceTrigger=PropertyChanged}" 
+                Text="{Binding NewTagName, UpdateSourceTrigger=PropertyChanged}" 
                 IsEditable="True"
                 ItemsSource="{Binding AvailableTags}" 
                 DisplayMemberPath="Name"

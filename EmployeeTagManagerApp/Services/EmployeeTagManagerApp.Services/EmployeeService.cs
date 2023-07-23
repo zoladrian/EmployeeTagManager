@@ -33,6 +33,8 @@ namespace EmployeeTagManagerApp.Services
         {
             return await _dbContext.Employees
                 .AsNoTracking()
+                .Include(e => e.EmployeeTags) 
+                .ThenInclude(et => et.Tag) 
                 .FirstOrDefaultAsync(e => e.Id == id);
         }
 

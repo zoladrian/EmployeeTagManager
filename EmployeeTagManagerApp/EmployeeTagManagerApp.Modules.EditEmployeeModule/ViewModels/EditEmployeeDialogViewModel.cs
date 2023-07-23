@@ -136,31 +136,31 @@ namespace EmployeeTagManagerApp.Modules.EditEmployeeModule.ViewModels
         private async void LoadAvailableTags()
         {
             var tags = await _tagService.GetTagsAsync();
-            AvailableTags = new ObservableCollection<Tag>(tags.Where(t => !EmployeeTags.Any(et => et.Tag.Id == t.Id)));
+            AvailableTags = new ObservableCollection<Tag>(tags.Where(t => !EmployeeTags.Any(et => et?.Tag.Id == t.Id)));
         }
         private async void AddTag()
         {
+            Tag tagToAdd = null;
             var existingTag = AvailableTags.FirstOrDefault(t => t.Name == NewTagName);
             if (existingTag != null)
             {
                 existingTag.Description = NewTagDescription;
-
-                await _employeeService.AddTagToEmployeeAsync(Employee.Id, existingTag.Id);
-
-                var updatedEmployee = await _employeeService.GetEmployeeByIdAsync(Employee.Id);
-                EmployeeTags.Add(updatedEmployee.EmployeeTags.Last());
+                tagToAdd = existingTag;
             }
             else
             {
                 Tag newTag = new Tag { Name = NewTagName, Description = NewTagDescription };
                 await _tagService.CreateTagAsync(newTag);
-
-                await _employeeService.AddTagToEmployeeAsync(Employee.Id, newTag.Id);
-
-                var updatedEmployee = await _employeeService.GetEmployeeByIdAsync(Employee.Id);
-                EmployeeTags.Add(updatedEmployee.EmployeeTags.Last());
-
                 AvailableTags.Add(newTag);
+                tagToAdd = newTag;
+            }
+
+            await _employeeService.AddTagToEmployeeAsync(Employee.Id, tagToAdd.Id);
+            var updatedEmployee = await _employeeService.GetEmployeeByIdAsync(Employee.Id);
+            var newEmployeeTag = updatedEmployee.EmployeeTags.LastOrDefault(et => et.Tag.Id == tagToAdd.Id);
+            if (newEmployeeTag != null)
+            {
+                EmployeeTags.Add(newEmployeeTag);
             }
 
             NewTagName = string.Empty;
@@ -209,9 +209,7 @@ namespace EmployeeTagManagerApp.Modules.EditEmployeeModule.ViewModels
             employeeToUpdate.EmployeeTags = new List<EmployeeTag>(_employeeTags.Select(et => new EmployeeTag
             {
                 EmployeeId = et.EmployeeId,
-                TagId = et.TagId,
-                Employee = et.Employee,
-                Tag = et.Tag
+                TagId = et.TagId
             }));
         }
         public Employee ToEmployee()
