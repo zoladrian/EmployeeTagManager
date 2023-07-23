@@ -1,12 +1,11 @@
-﻿using EmployeeTagManagerApp.Services.Interfaces;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using EmployeeTagManagerApp.Data;
-using System;
-using Microsoft.EntityFrameworkCore;
+﻿using EmployeeTagManagerApp.Data;
 using EmployeeTagManagerApp.Data.Models;
-using System.Linq;
+using EmployeeTagManagerApp.Services.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using Prism.Events;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace EmployeeTagManagerApp.Services
 {
@@ -33,8 +32,8 @@ namespace EmployeeTagManagerApp.Services
         {
             return await _dbContext.Employees
                 .AsNoTracking()
-                .Include(e => e.EmployeeTags) 
-                .ThenInclude(et => et.Tag) 
+                .Include(e => e.EmployeeTags)
+                .ThenInclude(et => et.Tag)
                 .FirstOrDefaultAsync(e => e.Id == id);
         }
 
@@ -52,7 +51,6 @@ namespace EmployeeTagManagerApp.Services
                 await _dbContext.SaveChangesAsync();
             }
         }
-
 
         public async Task DeleteEmployeeAsync(int id)
         {

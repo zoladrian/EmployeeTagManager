@@ -1,8 +1,7 @@
-﻿using EmployeeTagManagerApp.Data;
-using Microsoft.EntityFrameworkCore.Design;
+﻿using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.EntityFrameworkCore;
 
-namespace EmployeeTagManagerApp.Data
+namespace EmployeeTagManagerApp.Data.Factories
 {
     public class ManagerDbContextFactory : IDesignTimeDbContextFactory<ManagerDbContext>
     {

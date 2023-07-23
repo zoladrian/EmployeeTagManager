@@ -1,6 +1,6 @@
-﻿using EmployeeTagManagerApp.Services;
-using EmployeeTagManagerApp.Data;
+﻿using EmployeeTagManagerApp.Data;
 using EmployeeTagManagerApp.Data.Models;
+using EmployeeTagManagerApp.Services;
 using EmployeeTagManagerApp.Services.Interfaces;
 
 namespace EmployeeTagManagerApp.Tests
@@ -170,6 +170,5 @@ namespace EmployeeTagManagerApp.Tests
         {
             _dbContext.Database.EnsureDeleted();
         }
-
     }
 }

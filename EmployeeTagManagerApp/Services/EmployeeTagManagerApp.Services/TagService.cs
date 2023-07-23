@@ -1,10 +1,9 @@
-﻿using EmployeeTagManagerApp.Services.Interfaces;
+﻿using EmployeeTagManagerApp.Data;
+using EmployeeTagManagerApp.Data.Models;
+using EmployeeTagManagerApp.Services.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using EmployeeTagManagerApp.Data;
-using System;
-using Microsoft.EntityFrameworkCore;
-using EmployeeTagManagerApp.Data.Models;
 
 namespace EmployeeTagManagerApp.Services
 {

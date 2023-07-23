@@ -7,12 +7,10 @@ namespace EmployeeTagManagerApp.Core.Mvvm
     {
         protected ViewModelBase()
         {
-
         }
 
         public virtual void Destroy()
         {
-
         }
     }
 }

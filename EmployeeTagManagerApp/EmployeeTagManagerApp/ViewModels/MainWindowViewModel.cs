@@ -10,9 +10,10 @@ namespace EmployeeTagManagerApp.ViewModels
     {
         private readonly IFileDialogService _fileDialogService;
         private readonly IDatabaseInitializer _databaseInitializer;
+
         public MainWindowViewModel(IFileDialogService fileDialogService, IDatabaseInitializer databaseInitializer)
         {
-            _databaseInitializer= databaseInitializer;
+            _databaseInitializer = databaseInitializer;
             _fileDialogService = fileDialogService ?? throw new ArgumentNullException(nameof(fileDialogService));
             LoadCommand = new DelegateCommand(OnLoadCommandExecuted);
         }

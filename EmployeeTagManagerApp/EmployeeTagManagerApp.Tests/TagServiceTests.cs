@@ -94,7 +94,6 @@ namespace EmployeeTagManagerApp.Tests
 
             // Assert
             Assert.AreEqual(0, _dbContext.Tags.Count());
-
         }
 
         [TearDown]

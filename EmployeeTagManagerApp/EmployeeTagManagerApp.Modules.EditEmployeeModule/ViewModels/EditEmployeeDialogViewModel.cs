@@ -1,14 +1,14 @@
 ﻿using EmployeeTagManagerApp.Data.Models;
+using EmployeeTagManagerApp.Data.Validators;
 using EmployeeTagManagerApp.Services.Interfaces;
+using FluentValidation;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Services.Dialogs;
 using System;
-using System.Linq;
-using System.Collections.ObjectModel;
-using EmployeeTagManagerApp.Data.Validators;
-using FluentValidation;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace EmployeeTagManagerApp.Modules.EditEmployeeModule.ViewModels
 {
@@ -40,7 +40,7 @@ namespace EmployeeTagManagerApp.Modules.EditEmployeeModule.ViewModels
                 .ObservesProperty(() => Employee.Phone);
             DeleteTagCommand = new DelegateCommand<Tag>(DeleteTag);
             _tagValidator = tagValidator;
-            _employeeValidator= employeeValidator;
+            _employeeValidator = employeeValidator;
         }
 
         public ObservableCollection<EmployeeTag> EmployeeTags
@@ -60,6 +60,7 @@ namespace EmployeeTagManagerApp.Modules.EditEmployeeModule.ViewModels
             get { return _availableTags; }
             set { SetProperty(ref _availableTags, value); }
         }
+
         public string NewTagName
         {
             get { return _newTagName; }
@@ -93,6 +94,7 @@ namespace EmployeeTagManagerApp.Modules.EditEmployeeModule.ViewModels
                 }
             }
         }
+
         public DelegateCommand AddTagCommand { get; }
 
         public DelegateCommand OkCommand { get; }
@@ -117,6 +119,7 @@ namespace EmployeeTagManagerApp.Modules.EditEmployeeModule.ViewModels
             EmployeeTags = new ObservableCollection<EmployeeTag>(Employee.EmployeeTags);
             LoadAvailableTags();
         }
+
         private void OnOk()
         {
             Employee employeeToUpdate = new Employee();
@@ -128,16 +131,19 @@ namespace EmployeeTagManagerApp.Modules.EditEmployeeModule.ViewModels
             };
             RequestClose?.Invoke(new DialogResult(ButtonResult.OK, dialogParameters));
         }
+
         private async void UpdateTagDescription(Tag tag)
         {
             await _tagService.UpdateTagAsync(tag);
             LoadAvailableTags();
         }
+
         private async void LoadAvailableTags()
         {
             var tags = await _tagService.GetTagsAsync();
             AvailableTags = new ObservableCollection<Tag>(tags.Where(t => !EmployeeTags.Any(et => et?.Tag.Id == t.Id)));
         }
+
         private async void AddTag()
         {
             Tag tagToAdd = null;
@@ -168,6 +174,7 @@ namespace EmployeeTagManagerApp.Modules.EditEmployeeModule.ViewModels
 
             LoadAvailableTags();
         }
+
         private bool CanOk()
         {
             if (Employee != null)
@@ -199,6 +206,7 @@ namespace EmployeeTagManagerApp.Modules.EditEmployeeModule.ViewModels
                 LoadAvailableTags();
             }
         }
+
         public void UpdateEmployee(Employee employeeToUpdate)
         {
             employeeToUpdate.Id = Employee.Id;
@@ -212,6 +220,7 @@ namespace EmployeeTagManagerApp.Modules.EditEmployeeModule.ViewModels
                 TagId = et.TagId
             }));
         }
+
         public Employee ToEmployee()
         {
             return new Employee

@@ -1,8 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System.Text;
-using EmployeeTagManagerApp.Data.Interfaces;
-using Prism.Events;
+﻿using EmployeeTagManagerApp.Data.Interfaces;
 using EmployeeTagManagerApp.Events;
+using Microsoft.EntityFrameworkCore;
+using Prism.Events;
+using System.Text;
 
 namespace EmployeeTagManagerApp.Data
 {
@@ -11,6 +11,7 @@ namespace EmployeeTagManagerApp.Data
         private readonly ManagerDbContext _dbContext;
         private readonly IEmployeeFactory _employeeFactory;
         private readonly IEventAggregator _eventAggregator;
+
         public DatabaseInitializer(ManagerDbContext dbContext, IEmployeeFactory employeeFactory, IEventAggregator eventAggregator)
         {
             _dbContext = dbContext;
@@ -47,6 +48,5 @@ namespace EmployeeTagManagerApp.Data
             }
             _eventAggregator.GetEvent<DatabaseChangedEvent>().Publish();
         }
-
     }
 }

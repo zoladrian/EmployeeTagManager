@@ -1,5 +1,4 @@
-﻿using System;
-namespace EmployeeTagManagerApp.Data.Models
+﻿namespace EmployeeTagManagerApp.Data.Models
 {
     public class Employee
     {

@@ -29,6 +29,4 @@ namespace EmployeeTagManagerApp.Data.Validators
                 .MaximumLength(20).WithMessage("Phone number can't be longer than 20 characters.");
         }
     }
-
-
 }

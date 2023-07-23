@@ -1,10 +1,6 @@
 ﻿using EmployeeTagManagerApp.Data.Models;
 using Prism.Mvvm;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EmployeeTagManagerApp.Modules.EditEmployeeModule.ViewModels
 {
@@ -16,6 +12,7 @@ namespace EmployeeTagManagerApp.Modules.EditEmployeeModule.ViewModels
         private string _phone;
         private int _id;
         private ICollection<EmployeeTag> _employeeTags;
+
         public EmployeeViewModel(Employee employee)
         {
             _id = employee.Id;
@@ -23,10 +20,11 @@ namespace EmployeeTagManagerApp.Modules.EditEmployeeModule.ViewModels
             _surname = employee.Surname;
             _email = employee.Email;
             _phone = employee.Phone;
-            _employeeTags= employee.EmployeeTags;
+            _employeeTags = employee.EmployeeTags;
         }
 
         public int Id { get => _id; }
+
         public string Name
         {
             get => _name;
@@ -78,7 +76,7 @@ namespace EmployeeTagManagerApp.Modules.EditEmployeeModule.ViewModels
                 }
             }
         }
-        public ICollection<EmployeeTag> EmployeeTags { get => _employeeTags; } 
-    }
 
+        public ICollection<EmployeeTag> EmployeeTags { get => _employeeTags; }
+    }
 }

@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using EmployeeTagManagerApp.Data.Models;
+using System.Collections.Generic;
 using System.Threading.Tasks;
-using EmployeeTagManagerApp.Data.Models;
 
 namespace EmployeeTagManagerApp.Services.Interfaces
 {
@@ -13,6 +13,7 @@ namespace EmployeeTagManagerApp.Services.Interfaces
         Task CreateTagAsync(Tag tag);
 
         Task UpdateTagAsync(Tag tag);
+
         Task DeleteTagAsync(int id);
     }
 }

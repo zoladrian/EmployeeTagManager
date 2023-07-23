@@ -1,6 +1,5 @@
 ﻿using EmployeeTagManagerApp.Data.Models;
 using Microsoft.EntityFrameworkCore;
-using System;
 
 namespace EmployeeTagManagerApp.Data
 {

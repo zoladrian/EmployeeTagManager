@@ -3,7 +3,7 @@ using EmployeeTagManagerApp.Data.Models;
 using FluentValidation;
 using FluentValidation.Results;
 
-namespace EmployeeTagManagerApp.Data
+namespace EmployeeTagManagerApp.Data.Factories
 {
     public class EmployeeFactory : IEmployeeFactory
     {
