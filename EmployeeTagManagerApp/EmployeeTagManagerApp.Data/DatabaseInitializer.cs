@@ -23,6 +23,8 @@ namespace EmployeeTagManagerApp.Data
         {
             await _dbContext.Database.EnsureCreatedAsync();
 
+            try
+            {
             if (!_dbContext.Employees.Any())
             {
                 string csvFileData;
@@ -47,6 +49,11 @@ namespace EmployeeTagManagerApp.Data
                 _dbContext.Database.ExecuteSqlRaw(sb.ToString());
             }
             _eventAggregator.GetEvent<DatabaseChangedEvent>().Publish();
+            }
+            catch (Exception ex)
+            {
+                _eventAggregator.GetEvent<ErrorOccurredEvent>().Publish($"An error occurred while initializing the database: {ex.Message}");
+            }
         }
     }
 }
