@@ -25,8 +25,9 @@ namespace EmployeeTagManagerApp.Data
 
             try
             {
-            if (!_dbContext.Employees.Any())
-            {
+                // Delete records from database
+                _dbContext.Database.ExecuteSqlRaw("DELETE FROM [dbo].[Employees]");
+
                 string csvFileData;
                 using (StreamReader sr = new StreamReader(path))
                 {
@@ -47,8 +48,7 @@ namespace EmployeeTagManagerApp.Data
                 sb.Append("SET IDENTITY_INSERT [dbo].[Employees] OFF;");
 
                 _dbContext.Database.ExecuteSqlRaw(sb.ToString());
-            }
-            _eventAggregator.GetEvent<DatabaseChangedEvent>().Publish();
+                _eventAggregator.GetEvent<DatabaseChangedEvent>().Publish();
             }
             catch (Exception ex)
             {

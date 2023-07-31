@@ -18,6 +18,7 @@ namespace EmployeeTagManagerApp.ViewModels
         public MainWindowViewModel(IFileDialogService fileDialogService, IDatabaseInitializer databaseInitializer, IEventAggregator eventAggregator)
         {
             _databaseInitializer = databaseInitializer;
+            _eventAggregator = eventAggregator;
             _fileDialogService = fileDialogService ?? throw new ArgumentNullException(nameof(fileDialogService));
             LoadCommand = new DelegateCommand(OnLoadCommandExecuted);
             _eventAggregator.GetEvent<ErrorOccurredEvent>().Subscribe(ShowError);

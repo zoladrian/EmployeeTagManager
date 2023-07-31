@@ -1,7 +1,16 @@
 ﻿using EmployeeTagManagerApp.Data;
 using EmployeeTagManagerApp.Data.Models;
-using EmployeeTagManagerApp.Services.EmployeeTagManagerApp.Services;
+using EmployeeTagManagerApp.Services;
 using EmployeeTagManagerApp.Services.Interfaces;
+using FluentValidation;
+using FluentValidation.Results;
+using NSubstitute;
+using NUnit.Framework;
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
+using EmployeeTagManagerApp.Services.EmployeeTagManagerApp.Services;
 
 namespace EmployeeTagManagerApp.Tests
 {
@@ -9,6 +18,8 @@ namespace EmployeeTagManagerApp.Tests
     {
         private ITagService _tagService;
         private ManagerDbContext _dbContext;
+        private IValidator<Tag> _validator;
+        private IEventAggregator _eventAggregator;
 
         [SetUp]
         public void Setup()
@@ -17,8 +28,9 @@ namespace EmployeeTagManagerApp.Tests
                 .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
                 .Options;
             _dbContext = new ManagerDbContext(options);
-            _dbContext.Database.EnsureCreated();
-            _tagService = new TagService(_dbContext);
+            _eventAggregator = Substitute.For<IEventAggregator>();
+            _validator = Substitute.For<IValidator<Tag>>();
+            _tagService = new TagService(_dbContext, _eventAggregator, _validator);
         }
 
         [Test]
@@ -45,6 +57,7 @@ namespace EmployeeTagManagerApp.Tests
         {
             // Arrange
             var tag = new Tag { Id = 1, Name = "Tag1", Description = "Description1" };
+            _validator.Validate(tag).Returns(new ValidationResult()); // Assuming the validation passes.
 
             // Act
             await _tagService.CreateTagAsync(tag);
@@ -67,6 +80,7 @@ namespace EmployeeTagManagerApp.Tests
 
             tag.Name = "UpdatedTag";
             tag.Description = "UpdatedDescription";
+            _validator.Validate(tag).Returns(new ValidationResult()); // Assuming the validation passes.
 
             // Act
             await _tagService.UpdateTagAsync(tag);
