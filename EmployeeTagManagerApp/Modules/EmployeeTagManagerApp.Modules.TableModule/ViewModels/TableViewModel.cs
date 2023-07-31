@@ -17,6 +17,7 @@ namespace EmployeeTagManagerApp.Modules.TableModule.ViewModels
     {
         private readonly IEmployeeService _employeeService;
         private readonly IDialogService _dialogService;
+        private readonly IEventAggregator _eventAggregator;
         private ObservableCollection<Employee> _employees;
         private Employee _selectedEmployee;
 
@@ -24,8 +25,9 @@ namespace EmployeeTagManagerApp.Modules.TableModule.ViewModels
         {
             _employeeService = employeeService;
             _dialogService= dialogService;
+            _eventAggregator = eventAggregator;
 
-            eventAggregator.GetEvent<DatabaseChangedEvent>().Subscribe(() => LoadDataAsync());
+            _eventAggregator.GetEvent<DatabaseChangedEvent>().Subscribe(() => LoadDataAsync());
             EditCommand = new DelegateCommand<Employee>(EditEmployee).ObservesProperty(() => SelectedEmployee);
             DeleteCommand = new DelegateCommand<Employee>(DeleteEmployee).ObservesProperty(() => SelectedEmployee);
         }
@@ -50,6 +52,7 @@ namespace EmployeeTagManagerApp.Modules.TableModule.ViewModels
         {
             var employees = await _employeeService.GetEmployeesAsync();
             Employees = new ObservableCollection<Employee>(employees);
+            _eventAggregator.GetEvent<OnDataLoaded>().Publish();
         }
 
         private void EditEmployee(Employee employee)

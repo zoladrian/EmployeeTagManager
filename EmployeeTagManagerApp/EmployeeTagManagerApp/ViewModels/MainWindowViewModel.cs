@@ -22,21 +22,44 @@ namespace EmployeeTagManagerApp.ViewModels
             _fileDialogService = fileDialogService ?? throw new ArgumentNullException(nameof(fileDialogService));
             LoadCommand = new DelegateCommand(OnLoadCommandExecuted);
             _eventAggregator.GetEvent<ErrorOccurredEvent>().Subscribe(ShowError);
+            _eventAggregator.GetEvent<OnDataLoaded>().Subscribe(OnDataLoaded);
         }
 
+        private bool _isLoadButtonEnabled = true;
+        private bool _isLoadingVisible;
+        public bool IsLoadButtonEnabled
+        {
+            get { return _isLoadButtonEnabled; }
+            set { SetProperty(ref _isLoadButtonEnabled, value); }
+        }
+
+        public bool IsLoadingVisible
+        {
+            get { return _isLoadingVisible; }
+            set { SetProperty(ref _isLoadingVisible, value); }
+        }
         public DelegateCommand LoadCommand { get; }
 
-        private void OnLoadCommandExecuted()
+        private async void OnLoadCommandExecuted()
         {
             string filePath = _fileDialogService.ShowOpenFileDialog();
             if (filePath != null)
             {
-                _databaseInitializer.InitializeAsync(filePath);
+                IsLoadButtonEnabled = false;
+                IsLoadingVisible = true;
+
+                await _databaseInitializer.InitializeAsync(filePath);
             }
+        }
+        private void OnDataLoaded()
+        {
+            IsLoadButtonEnabled = true;
+            IsLoadingVisible = false;
         }
         private void ShowError(string error)
         {
             MessageBox.Show(error);
+            OnDataLoaded();
         }
     }
 }
