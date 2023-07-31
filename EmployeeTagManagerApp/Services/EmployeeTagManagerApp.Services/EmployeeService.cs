@@ -1,6 +1,9 @@
 ﻿using EmployeeTagManagerApp.Data;
 using EmployeeTagManagerApp.Data.Models;
+using EmployeeTagManagerApp.Events;
 using EmployeeTagManagerApp.Services.Interfaces;
+using FluentValidation;
+using FluentValidation.Results;
 using Microsoft.EntityFrameworkCore;
 using Prism.Events;
 using System.Collections.Generic;
@@ -13,11 +16,13 @@ namespace EmployeeTagManagerApp.Services
     {
         private readonly ManagerDbContext _dbContext;
         private readonly IEventAggregator _eventAggregator;
+        private readonly IValidator<Employee> _validator;
 
-        public EmployeeService(ManagerDbContext dbContext, IEventAggregator eventAggregator)
+        public EmployeeService(ManagerDbContext dbContext, IEventAggregator eventAggregator, IValidator<Employee> validator)
         {
             _eventAggregator = eventAggregator;
             _dbContext = dbContext;
+            _validator = validator;
         }
 
         public async Task<IEnumerable<Employee>> GetEmployeesAsync()
@@ -39,6 +44,15 @@ namespace EmployeeTagManagerApp.Services
 
         public async Task UpdateEmployeeAsync(Employee employee)
         {
+            ValidationResult results = _validator.Validate(employee);
+
+            if (!results.IsValid)
+            {
+                string errorMessage = string.Join(", ", results.Errors.Select(x => x.ErrorMessage));
+                _eventAggregator.GetEvent<ErrorOccurredEvent>().Publish(errorMessage);
+                return;
+            }
+
             var existingEmployee = await _dbContext.Employees.FirstOrDefaultAsync(e => e.Id == employee.Id);
 
             if (existingEmployee != null)
@@ -50,6 +64,10 @@ namespace EmployeeTagManagerApp.Services
                 existingEmployee.EmployeeTags = employee.EmployeeTags;
                 await _dbContext.SaveChangesAsync();
             }
+            else
+            {
+                _eventAggregator.GetEvent<ErrorOccurredEvent>().Publish($"Employee with ID {employee.Id} does not exist.");
+            }
         }
 
         public async Task DeleteEmployeeAsync(int id)
@@ -60,10 +78,29 @@ namespace EmployeeTagManagerApp.Services
                 _dbContext.Employees.Remove(employee);
                 await _dbContext.SaveChangesAsync();
             }
+            else
+            {
+                _eventAggregator.GetEvent<ErrorOccurredEvent>().Publish($"Cannot delete. Employee with ID {id} does not exist.");
+            }
         }
 
         public async Task AddTagToEmployeeAsync(int employeeId, int tagId)
         {
+            var employee = await _dbContext.Employees.FirstOrDefaultAsync(e => e.Id == employeeId);
+            var tag = await _dbContext.Tags.FirstOrDefaultAsync(t => t.Id == tagId);
+
+            if (employee == null)
+            {
+                _eventAggregator.GetEvent<ErrorOccurredEvent>().Publish($"Employee with ID {employeeId} does not exist.");
+                return;
+            }
+
+            if (tag == null)
+            {
+                _eventAggregator.GetEvent<ErrorOccurredEvent>().Publish($"Tag with ID {tagId} does not exist.");
+                return;
+            }
+
             var employeeTag = new EmployeeTag
             {
                 EmployeeId = employeeId,
@@ -76,6 +113,21 @@ namespace EmployeeTagManagerApp.Services
 
         public async Task RemoveTagFromEmployeeAsync(int employeeId, int tagId)
         {
+            var employee = await _dbContext.Employees.FirstOrDefaultAsync(e => e.Id == employeeId);
+            var tag = await _dbContext.Tags.FirstOrDefaultAsync(t => t.Id == tagId);
+
+            if (employee == null)
+            {
+                _eventAggregator.GetEvent<ErrorOccurredEvent>().Publish($"Employee with ID {employeeId} does not exist.");
+                return;
+            }
+
+            if (tag == null)
+            {
+                _eventAggregator.GetEvent<ErrorOccurredEvent>().Publish($"Tag with ID {tagId} does not exist.");
+                return;
+            }
+
             var employeeTag = await _dbContext.EmployeeTags
                 .FirstOrDefaultAsync(et => et.EmployeeId == employeeId && et.TagId == tagId);
 
@@ -83,6 +135,10 @@ namespace EmployeeTagManagerApp.Services
             {
                 _dbContext.EmployeeTags.Remove(employeeTag);
                 await _dbContext.SaveChangesAsync();
+            }
+            else
+            {
+                _eventAggregator.GetEvent<ErrorOccurredEvent>().Publish($"Tag with ID {tagId} does not exist for employee with ID {employeeId}.");
             }
         }
 
