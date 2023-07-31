@@ -2,6 +2,8 @@
 using EmployeeTagManagerApp.Data.Models;
 using EmployeeTagManagerApp.Services;
 using EmployeeTagManagerApp.Services.Interfaces;
+using FluentValidation;
+using FluentValidation.Results;
 
 namespace EmployeeTagManagerApp.Tests
 {
@@ -9,6 +11,7 @@ namespace EmployeeTagManagerApp.Tests
     {
         private IEmployeeService _employeeService;
         private ManagerDbContext _dbContext;
+        private IValidator<Employee> _validator;
 
         [SetUp]
         public void Setup()
@@ -19,8 +22,9 @@ namespace EmployeeTagManagerApp.Tests
 
             _dbContext = new ManagerDbContext(options);
             var mockEventAggregator = Substitute.For<IEventAggregator>();
+            _validator = Substitute.For<IValidator<Employee>>();
 
-            _employeeService = new EmployeeService(_dbContext, mockEventAggregator);
+            _employeeService = new EmployeeService(_dbContext, mockEventAggregator, _validator);
         }
 
         [Test]
@@ -57,6 +61,8 @@ namespace EmployeeTagManagerApp.Tests
 
             employee.Name = "UpdatedJohn";
             employee.Email = "updated.john.doe@example.com";
+
+            _validator.Validate(employee).Returns(new ValidationResult()); // Assuming the validation passes.
 
             // Act
             await _employeeService.UpdateEmployeeAsync(employee);
